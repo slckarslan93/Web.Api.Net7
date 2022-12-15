@@ -84,7 +84,7 @@ namespace ApiProject.Services.CharacterService
             try
             {
 
-                var characater = characters.FirstOrDefault(x => x.Id == updatedCharacter.Id);
+                var characater = await _context.Characters.FirstOrDefaultAsync(x => x.Id == updatedCharacter.Id);
 
                 if (characater is null)
                 {
@@ -99,6 +99,7 @@ namespace ApiProject.Services.CharacterService
                 characater.Intelligence = updatedCharacter.Intelligence;
                 characater.Class = updatedCharacter.Class;
 
+                await _context.SaveChangesAsync();
                 serviceResponse.Data = _mapper.Map<GetCharacterDto>(characater);
             }
             catch (Exception ex)
