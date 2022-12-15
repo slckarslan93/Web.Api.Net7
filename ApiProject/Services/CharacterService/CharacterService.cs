@@ -8,11 +8,7 @@ namespace ApiProject.Services.CharacterService
 {
     public class CharacterService : ICharacterService
     {
-        private static List<Character> characters = new List<Character>
-        {
-            new Character(),
-            new Character{Id  =1,Name = "Sam"}
-        };
+        
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
@@ -41,16 +37,17 @@ namespace ApiProject.Services.CharacterService
             try
             {
 
-                var characater = characters.FirstOrDefault(x => x.Id == id);
+                var characater =  await _context.Characters.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (characater is null)
                 {
                     throw new Exception($"Character with Id '{id}' not found.");
                 }
-                characters.Remove(characater);
+                _context.Characters.Remove(characater);
 
+                await _context.SaveChangesAsync();
 
-                serviceResponse.Data = characters.Select(x => _mapper.Map<GetCharacterDto>(x)).ToList();
+                serviceResponse.Data = await _context.Characters.Select(x => _mapper.Map<GetCharacterDto>(x)).ToListAsync();
             }
             catch (Exception ex)
             {
