@@ -64,15 +64,15 @@ namespace ApiProject.Services.CharacterService
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
             var dbCharacters = await _context.Characters.ToListAsync();
-            serviceResponse.Data = characters.Select(x => _mapper.Map<GetCharacterDto>(x)).ToList();
+            serviceResponse.Data = dbCharacters.Select(x => _mapper.Map<GetCharacterDto>(x)).ToList();
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<GetCharacterDto>> GetCharacterById(int id)
         {
             var serviceResponse = new ServiceResponse<GetCharacterDto>();
-            var characater = characters.FirstOrDefault(c => c.Id == id);
-            serviceResponse.Data = _mapper.Map<GetCharacterDto>(characater);
+            var dbCharacater = await _context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+            serviceResponse.Data = _mapper.Map<GetCharacterDto>(dbCharacater);
             return serviceResponse;
         }
 
