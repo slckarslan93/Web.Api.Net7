@@ -1,6 +1,8 @@
-﻿using ApiProject.Dtos.Character;
+﻿using ApiProject.Data;
+using ApiProject.Dtos.Character;
 using ApiProject.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiProject.Services.CharacterService
 {
@@ -12,9 +14,11 @@ namespace ApiProject.Services.CharacterService
             new Character{Id  =1,Name = "Sam"}
         };
         private readonly IMapper _mapper;
+        private readonly DataContext _context;
 
-        public CharacterService(IMapper mapper)
+        public CharacterService(IMapper mapper,DataContext context)
         {
+            _context = context;
             _mapper = mapper;
         }
 
@@ -59,6 +63,7 @@ namespace ApiProject.Services.CharacterService
         public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
+            var dbCharacters = await _context.Characters.ToListAsync();
             serviceResponse.Data = characters.Select(x => _mapper.Map<GetCharacterDto>(x)).ToList();
             return serviceResponse;
         }
