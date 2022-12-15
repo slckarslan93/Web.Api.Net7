@@ -10,7 +10,7 @@ namespace ApiProject.Controllers
         private static List<Character> characters = new List<Character>
         {
             new Character(),
-            new Character{Name = "Sam"}
+            new Character{Id  =1,Name = "Sam"}
         };
 
         [HttpGet("GetAll")]
@@ -19,10 +19,17 @@ namespace ApiProject.Controllers
             return Ok(characters);
         }
 
-        [HttpGet]
-        public ActionResult<Character> GetSingle()
+        [HttpGet("{id}")]
+        public ActionResult<Character> GetSingle(int id)
         {
-            return Ok(characters[0]);
+            return Ok(characters.FirstOrDefault(x=>x.Id==id));
+        }
+
+        [HttpPost]
+        public ActionResult<List<Character>> AddCharacter(Character newCharacter)
+        {
+            characters.Add(newCharacter);
+            return Ok(characters);
         }
 
     }
