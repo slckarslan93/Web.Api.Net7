@@ -10,6 +10,7 @@ namespace ApiProject
         {
             CreateMap<Character, GetCharacterDto>().ReverseMap();
             CreateMap<Character, AddCharacterDto>().ReverseMap();
+            CreateMap<Character, UpdateCharacterDto>().ReverseMap();
         }
     }
 }
