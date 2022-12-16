@@ -1,10 +1,13 @@
 ﻿using ApiProject.Dtos.Character;
 using ApiProject.Models;
 using ApiProject.Services.CharacterService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ApiProject.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CharacterController:ControllerBase
@@ -18,7 +21,8 @@ namespace ApiProject.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> Get()
         {
-            return Ok( await _characterService.GetAllCharacters());
+            int userId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value);
+            return Ok( await _characterService.GetAllCharacters(userId));
         }
 
         [HttpGet("{id}")]
