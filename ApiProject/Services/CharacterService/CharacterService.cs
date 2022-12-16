@@ -17,8 +17,6 @@ namespace ApiProject.Services.CharacterService
             _context = context;
             _mapper = mapper;
         }
-
-
         public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDto>>();
