@@ -1,4 +1,5 @@
 ﻿using ApiProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiProject.Data
 {
@@ -17,6 +18,13 @@ namespace ApiProject.Data
 
         public async Task<ServiceResponse<int>> Register(User user, string password)
         {
+            var response = new ServiceResponse<int>();
+            if (await UserExists(user.Username))
+            {
+                response.Success = false;
+                response.Message = "User already exists.";
+                return response;
+            }
             CreatePasswordHash(password,out byte[] passwordHash,out byte[] passwordSalt);
 
             user.PasswordHash = passwordHash;
@@ -25,14 +33,17 @@ namespace ApiProject.Data
 
             _context.Users.Add(user);   
             await _context.SaveChangesAsync();
-            var response = new ServiceResponse<int>();
             response.Data = user.Id;
             return response;
         }
 
-        public Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string username)
         {
-            throw new NotImplementedException();
+            if (await _context.Users.AnyAsync(x=>x.Username.ToLower() == username.ToLower()))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void CreatePasswordHash(string password,out byte[] passwordHash,out byte[] passwordSalt)
