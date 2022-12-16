@@ -1,4 +1,6 @@
-﻿using ApiProject.Models;
+﻿using ApiProject.Dtos.Skill;
+using ApiProject.Dtos.Weapon;
+using ApiProject.Models;
 
 namespace ApiProject.Dtos.Character
 {
@@ -11,5 +13,7 @@ namespace ApiProject.Dtos.Character
         public int Defense { get; set; } = 10;
         public int Intelligence { get; set; } = 10;
         public RpgClass Class { get; set; } = RpgClass.Knight;
+        public GetWeaponDto? Weapon { get; set; }
+        public List<GetSkillDto>? Skills { get; set; }
     }
 }
