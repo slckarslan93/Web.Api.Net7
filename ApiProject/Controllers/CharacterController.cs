@@ -10,9 +10,10 @@ namespace ApiProject.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class CharacterController:ControllerBase
+    public class CharacterController : ControllerBase
     {
         private readonly ICharacterService _characterService;
+
         public CharacterController(ICharacterService characterService)
         {
             _characterService = characterService;
@@ -21,7 +22,7 @@ namespace ApiProject.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> Get()
         {
-            return Ok( await _characterService.GetAllCharacters());
+            return Ok(await _characterService.GetAllCharacters());
         }
 
         [HttpGet("{id}")]
@@ -37,9 +38,9 @@ namespace ApiProject.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> UpdateCharacter(UpdateCharacterDto updatedCharacterDto)
+        public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> UpdateCharacter(UpdateCharacterDto updatedCharacter)
         {
-            var response = await _characterService.UpdateCharacter(updatedCharacterDto);
+            var response = await _characterService.UpdateCharacter(updatedCharacter);
             if (response.Data is null)
             {
                 return NotFound(response);
@@ -58,11 +59,11 @@ namespace ApiProject.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> AddCharacterSkill(AddCharacterSkillDto newCharacterSkill)
+        [HttpPost("Skill")]
+        public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> AddCharacterSkill(
+            AddCharacterSkillDto newCharacterSkill)
         {
             return Ok(await _characterService.AddCharacterSkill(newCharacterSkill));
         }
-
     }
 }

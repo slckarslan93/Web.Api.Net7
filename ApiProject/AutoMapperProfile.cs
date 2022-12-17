@@ -1,4 +1,5 @@
 ﻿using ApiProject.Dtos.Character;
+using ApiProject.Dtos.Fight;
 using ApiProject.Dtos.Skill;
 using ApiProject.Dtos.Weapon;
 using ApiProject.Models;
@@ -15,6 +16,7 @@ namespace ApiProject
             CreateMap<Character, UpdateCharacterDto>().ReverseMap();
             CreateMap<Weapon, GetWeaponDto>().ReverseMap();
             CreateMap<Skill, GetSkillDto>().ReverseMap();
+            CreateMap<Character, HighscoreDto>().ReverseMap();
         }
     }
 }
