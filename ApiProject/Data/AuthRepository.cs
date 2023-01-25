@@ -11,11 +11,12 @@ namespace ApiProject.Data
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
 
-        public AuthRepository(DataContext context,IConfiguration configuration)
+        public AuthRepository(DataContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
         }
+
         public async Task<ServiceResponse<string>> Login(string username, string password)
         {
             var response = new ServiceResponse<string>();
@@ -51,7 +52,6 @@ namespace ApiProject.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -104,17 +104,15 @@ namespace ApiProject.Data
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject= new ClaimsIdentity(claims),
-                Expires= DateTime.UtcNow.AddDays(1),
-                SigningCredentials= creds
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = creds
             };
 
-            JwtSecurityTokenHandler tokenHandler= new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
-
-     
         }
     }
 }

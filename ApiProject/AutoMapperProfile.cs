@@ -7,7 +7,7 @@ using AutoMapper;
 
 namespace ApiProject
 {
-    public class AutoMapperProfile:Profile
+    public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {

@@ -7,8 +7,8 @@ namespace ApiProject.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Skill>().HasData(
@@ -22,7 +22,5 @@ namespace ApiProject.Data
         public DbSet<User> Users => Set<User>();
         public DbSet<Weapon> Weapons => Set<Weapon>();
         public DbSet<Skill> Skills => Set<Skill>();
-
-
     }
 }

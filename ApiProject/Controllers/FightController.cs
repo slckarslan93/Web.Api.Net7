@@ -12,6 +12,7 @@ namespace ApiProject.Controllers
     public class FightController : ControllerBase
     {
         private readonly IFightService _fightService;
+
         public FightController(IFightService fightService)
         {
             _fightService = fightService;

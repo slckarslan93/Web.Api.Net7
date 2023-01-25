@@ -7,6 +7,5 @@
         public int AttackerHP { get; set; }
         public int OpponentHP { get; set; }
         public int Damage { get; set; }
-
     }
 }

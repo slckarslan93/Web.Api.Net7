@@ -10,6 +10,7 @@ namespace ApiProject.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepo;
+
         public AuthController(IAuthRepository authRepo)
         {
             _authRepo = authRepo;
@@ -32,7 +33,7 @@ namespace ApiProject.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(UserLoginDto request)
         {
-            var response = await _authRepo.Login(request.Username,request.Password);
+            var response = await _authRepo.Login(request.Username, request.Password);
             if (!response.Success)
             {
                 return BadRequest(response);

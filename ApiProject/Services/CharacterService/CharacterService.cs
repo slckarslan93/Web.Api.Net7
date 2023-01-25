@@ -7,7 +7,6 @@ using System.Security.Claims;
 
 namespace ApiProject.Services.CharacterService
 {
-
     public class CharacterService : ICharacterService
     {
         private readonly IMapper _mapper;
@@ -166,4 +165,3 @@ namespace ApiProject.Services.CharacterService
         }
     }
 }
-

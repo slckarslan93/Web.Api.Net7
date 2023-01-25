@@ -3,7 +3,6 @@ using ApiProject.Models;
 using ApiProject.Services.CharacterService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace ApiProject.Controllers
 {

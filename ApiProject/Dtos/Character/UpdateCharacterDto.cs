@@ -1,5 +1,4 @@
-﻿using ApiProject.Dtos.Weapon;
-using ApiProject.Models;
+﻿using ApiProject.Models;
 
 namespace ApiProject.Dtos.Character
 {

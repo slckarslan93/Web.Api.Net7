@@ -8,6 +8,5 @@ namespace ApiProject.Models
         Knight = 1,
         Mage,
         Cleric
-
     }
 }

@@ -23,7 +23,6 @@ namespace ApiProject.Controllers
         public async Task<ActionResult<ServiceResponse<GetCharacterDto>>> AddWeapon(AddWeaponDto newWeapon)
         {
             return Ok(await _weaponService.AddWeapon(newWeapon));
-
         }
     }
 }
